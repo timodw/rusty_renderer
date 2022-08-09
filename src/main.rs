@@ -1,25 +1,9 @@
-#[derive(Debug)]
-struct Pixel{
-    r: u8,
-    g: u8,
-    b: u8
-}
+use crate::canvas::Canvas;
 
-impl Pixel {
-    fn add_intensity(& mut self, i: i8) {
-        self.r = std::cmp::max(std::cmp::min(0, self.r as i8 + i) as u8, 255);
-    }
-}
-
-
-#[derive(Debug)]
-struct Canvas{
-    width: u32,
-    height: u32,
-}
-
+pub mod canvas;
 
 fn main() {
-    let p_1 = Pixel { r: 123, g: 234, b: 56 };
-    println!("Pixel: {:?}!", p_1);
+    let canvas = canvas::Canvas::init(128, 128);
+    canvas.write_to_file("out/test.png");
+    //println!("{:?}", canvas);
 }
