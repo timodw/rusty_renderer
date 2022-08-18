@@ -11,7 +11,13 @@ impl Renderer for Raytracer {
         for x in -canvas.height / 2..canvas.height / 2 {
             for y in -canvas.width / 2..canvas.width / 2 {
                 let (vp_x, vp_y) = canvas.to_viewport_coordinates(x, y, &world.viewport);
-                println!("x: {:?}, y: {:?}; x: {:?}, y: {:?}", x, y, vp_x, vp_y);
+                let viewport_vector = Vector3D {
+                    x: vp_x,
+                    y: vp_y,
+                    ..world.viewport.center
+                };
+                let ray_dir = viewport_vector - world.camera.position;
+                println!("Camera: {:?} \nVP: {:?} \nD: {:?}", world.camera.position, viewport_vector, ray_dir);
             }
         }
     }

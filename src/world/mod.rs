@@ -11,13 +11,13 @@ pub struct Viewport {
 
 #[derive(Debug, Copy, Clone)]
 pub struct Camera {
-    position: Vector3D,
-    direction: Vector3D
+    pub position: Vector3D,
+    pub direction: Vector3D
 }
 
 #[derive(Debug)]
 pub struct World {
-    camera: Camera,
+    pub camera: Camera,
     pub viewport: Viewport
 }
 
@@ -31,7 +31,7 @@ impl World {
             viewport: Viewport { 
                 width: 1.,
                 height: 1.,
-                center: Vector3D::init(0., 0., 0.)
+                center: Vector3D::init(0., 0., 1.)
             } }
     }
 }
