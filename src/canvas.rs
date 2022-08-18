@@ -1,18 +1,20 @@
 use image;
 
+use crate::world::Viewport;
+
 #[derive(Debug)]
 pub struct Canvas {
-    width: usize,
-    height: usize,
-    grid: Vec<Vec<Pixel>>
+    pub width: i64,
+    pub height: i64,
+    pub grid: Vec<Vec<Pixel>>
 }
 
 impl Canvas {
-    pub fn init(width: usize, height: usize) -> Canvas {
+    pub fn init(width: i64, height: i64) -> Canvas {
         Canvas {
             width: width,
             height: height,
-            grid: vec![vec![Pixel { r: 128, g: 128, b: 0 }; width]; height]
+            grid: vec![vec![Pixel { r: 128, g: 128, b: 0 }; width as usize]; height as usize]
         }
     }
 
@@ -33,13 +35,18 @@ impl Canvas {
             }
         );
 
-
         img
+    }
+
+    pub fn to_viewport_coordinates(&self, c_x: i64, c_y: i64, vp: &Viewport) -> (f64, f64) {
+        let v_x: f64 = (c_x as f64) * (vp.width / self.width as f64);
+        let v_y: f64 = (c_y as f64) * (vp.height / self.height as f64);
+        (v_x, v_y)
     }
 }
 
 #[derive(Debug, Clone, Copy)]
-struct Pixel {
+pub struct Pixel {
     r: u8,
     g: u8,
     b: u8

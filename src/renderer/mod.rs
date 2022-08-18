@@ -1,6 +1,8 @@
-use canvas::Canvas;
-use object::Object;
+pub mod raytracer;
+
+use crate::canvas::Canvas;
+use crate::world::World;
 
 pub trait Renderer {
-    fn render(&self, obj: &Object) -> Canvas;
+    fn render(&self, world: &World, canvas: &mut Canvas);
 }

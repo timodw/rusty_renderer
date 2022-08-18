@@ -1,9 +1,14 @@
-use crate::canvas::Canvas;
+use crate::world::Viewport;
 
 pub mod canvas;
+pub mod world;
+pub mod renderer;
+
+use renderer::Renderer;
 
 fn main() {
-    let canvas = canvas::Canvas::init(128, 128);
-    canvas.write_to_file("out/test.png");
-    //println!("{:?}", canvas);
+    let mut canvas = canvas::Canvas::init(8, 8);
+    let world = world::World::init();
+    let rt: renderer::raytracer::Raytracer = renderer::raytracer::Raytracer { };
+    rt.render(&world, &mut canvas);
 }
